@@ -1,20 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Text, View, StyleSheet, TextInput, Button, Pressable } from 'react-native'; 
+import Home from './components/Home';
+import LogPushups from './components/LogPushups';
+import PastLogs from './components/PastLogs';
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [url, setUrl] = React.useState("/")
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+  switch (url) {
+    case "":
+      return <Text>Empty!</Text>
+    case "/log":
+      return <LogPushups setURL={ setUrl } />
+    case "/past":
+      return <PastLogs setURL={ setUrl } />
+    default:
+      return <Home setURL={ setUrl } />
+  }
+}
